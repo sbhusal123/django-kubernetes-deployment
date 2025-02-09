@@ -1,6 +1,6 @@
 # Sample Deployment Of Django Application With:
 - Redis
-- Django
+- Postgres
 - Persistent Volumes (use local mount path)
 
 # Commands:
