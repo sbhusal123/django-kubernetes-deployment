@@ -14,3 +14,6 @@ app/media
 
 # database
 app/db.sqlite3
+
+# kubernetes
+k8s/*

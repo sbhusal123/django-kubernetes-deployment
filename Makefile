@@ -1,8 +1,15 @@
 run:
-	kubectl apply -f k8s/
+	kubectl apply -f k8s/namespace.yml
+	kubectl apply -f k8s/config.yml
+	kubectl apply -f k8s/postgres-vol.yml
+	kubectl apply -f k8s/redis-vol.yml
+	kubectl apply -f k8s/static-media-vol.yml
+	kubectl apply -f k8s/postgres.yml
+	kubectl apply -f k8s/redis.yml
+	kubectl apply -f k8s/webapp.yml
 destroy:
 	kubectl delete -f k8s/
-list_services:
+list_svc:
 	kubectl get svc -n django-app
 list_rc:
 	kubectl get replicaset -n django-app
