@@ -1,7 +1,16 @@
+# cache
 *.pyc
 __pycache__/
 
+# envs
 env
-static
-media
-db.sqlite3
+venv
+
+# static and media files
+app/static
+app/static/**/*
+app/media/**/*
+app/media
+
+# database
+app/db.sqlite3

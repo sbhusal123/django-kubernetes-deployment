@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 
 
 RUN apt-get update && apt-get install -y \
-    libpq-dev gcc build-essential python3-dev \
+    libpq-dev gcc build-essential libpq-dev python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 
