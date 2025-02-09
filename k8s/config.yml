@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: django-conf
+data:
+  DB_NAME: foo
+  DB_USER: postgres
+  DB_PASS: password
+  DB_HOST: postgres-svc
+  DB_PORT: "5432"
