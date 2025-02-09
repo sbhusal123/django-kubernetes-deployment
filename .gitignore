@@ -1,0 +1,14 @@
+# venv env
+env/
+venv/
+
+# cache files
+*.pyc
+__pycache__/*
+
+# database
+*.sqlite3
+
+# static and media
+static/
+media/
