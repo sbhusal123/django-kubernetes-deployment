@@ -40,3 +40,5 @@ watch_logs:
 	watch kubectl logs $(POD) -n $(NAMESPACE)
 exec:
 	kubectl exec -it $(POD) -n $(NAMESPACE) -- /bin/bash
+rollout_deployment:
+	kubectl rollout restart deployment/django -n $(NAMESPACE)

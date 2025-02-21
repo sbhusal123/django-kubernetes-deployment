@@ -64,7 +64,9 @@ http://192.168.39.66:31073
 
 - **Watch Logs:** ``make watch_logs POD=<pod_name>``
 
-Here, ``django-app`` is the namespace.
+- **Rollout Deployment:** ``make rollout_deployment``
+
+**Note:** if any changes is done to ConfigMap values, make sure fresh deployment is rolled out with ``make rollout_deployment``.
 
 Volumes are mounted insde: ``/mnt/`` in the minikube. To view volumes:
 
@@ -76,3 +78,5 @@ Volumes are mounted insde: ``/mnt/`` in the minikube. To view volumes:
 - [CreateContainerConfigError](https://stackoverflow.com/questions/63059963/kubernete-createcontainerconfigerror)
 
 - [Kubernetes Resource Creation](https://github.com/sbhusal123/kubernetes-curated/tree/main/Curated%20Reference/Resource%20Creation)
+
+- [Persistent Volume Creation With Minikube](https://github.com/sbhusal123/kubernetes-curated/blob/main/Curated%20Reference/Using%20Volumes%20From%20Host.md)
