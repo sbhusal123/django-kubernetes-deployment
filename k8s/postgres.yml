@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: StatefulSet
 metadata:
   name: postgres
   namespace: django-app
 spec:
+  serviceName: "postgres"
   replicas: 1
   selector:
     matchLabels:
@@ -41,17 +42,3 @@ spec:
         - name: postgres-storage
           persistentVolumeClaim:
             claimName: postgres-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres-svc
-  namespace: django-app
-spec:
-  selector:
-    app: postgres
-  ports:
-    - protocol: TCP
-      port: 5432
-      targetPort: 5432
-  type: ClusterIP

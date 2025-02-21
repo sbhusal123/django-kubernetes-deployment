@@ -7,5 +7,5 @@ data:
   DB_NAME: foo
   DB_USER: postgres
   DB_PASS: password
-  DB_HOST: postgres-svc
+  DB_HOST: postgres
   DB_PORT: "5432"

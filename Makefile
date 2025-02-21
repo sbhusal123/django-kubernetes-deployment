@@ -1,23 +1,42 @@
+K8S_DIR = k8s
+NAMESPACE = django-app
+
 run:
-	kubectl apply -f k8s/namespace.yml
-	kubectl apply -f k8s/config.yml
-	kubectl apply -f k8s/postgres-vol.yml
-	kubectl apply -f k8s/redis-vol.yml
-	kubectl apply -f k8s/static-media-vol.yml
-	kubectl apply -f k8s/postgres.yml
-	kubectl apply -f k8s/redis.yml
-	kubectl apply -f k8s/webapp.yml
+	kubectl apply -f $(K8S_DIR)/namespace.yml
+	kubectl apply -f $(K8S_DIR)/config.yml
+	kubectl apply -f $(K8S_DIR)/postgres-vol.yml
+	kubectl apply -f $(K8S_DIR)/redis-vol.yml
+	kubectl apply -f $(K8S_DIR)/static-media-vol.yml
+	kubectl apply -f $(K8S_DIR)/postgres.yml
+	kubectl apply -f $(K8S_DIR)/redis.yml
+	kubectl apply -f $(K8S_DIR)/webapp.yml
+
 destroy:
-	kubectl delete -f k8s/
+	kubectl delete -f $(K8S_DIR)/
+
 list_svc:
-	kubectl get svc -n django-app
+	kubectl get svc -n $(NAMESPACE)
+
 list_rc:
-	kubectl get replicaset -n django-app
+	kubectl get replicaset -n $(NAMESPACE)
+
 list_dep:
-	kubectl get deployment -n django-app
+	kubectl get deployment -n $(NAMESPACE)
+
 list_pv:
-	kubectl get pv -n django-app
+	kubectl get pv -n $(NAMESPACE)
+
 list_pvc:
-	kubectl get pvc -n django-app
+	kubectl get pvc -n $(NAMESPACE)
+
 list_pods:
-	kubectl get pods -n django-app
+	kubectl get pods -n $(NAMESPACE)
+
+list_nodes:
+	kubectl get nodes
+logs:
+	kubectl logs -n $(NAMESPACE) $(POD) -f
+watch_logs:
+	watch kubectl logs $(POD) -n $(NAMESPACE)
+exec:
+	kubectl exec -it $(POD) -n $(NAMESPACE) -- /bin/bash

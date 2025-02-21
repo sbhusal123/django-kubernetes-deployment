@@ -60,11 +60,9 @@ http://192.168.39.66:31073
 
 - **List Pods:** ``make list_pods``
 
-## Kubernetes Handy Commands:
+- **Drop shell context into pods:** ``make exec POD=<pod_name>``
 
-- **Drop shell context into pods:** ``kubectl exec -it <pod-name> -n django-app -- /bin/bash``
-
-- **Watch Logs:** `` watch kubectl logs <pod_name> -n django-app``
+- **Watch Logs:** ``make watch_logs POD=<pod_name>``
 
 Here, ``django-app`` is the namespace.
 
