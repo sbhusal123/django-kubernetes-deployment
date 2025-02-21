@@ -16,6 +16,7 @@ spec:
       containers:
         - name: django
           image: sbhusal123/django-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           envFrom:
@@ -23,16 +24,16 @@ spec:
                 name: django-conf
           volumeMounts:
             - name:  media-storage
-              mountPath:  /app/media/
+              mountPath:  /app/media
             - name:  static-storage
-              mountPath:  /app/static/
+              mountPath:  /app/static
       volumes:
         - name:  media-storage
-          persistentVolumeClaim: 
+          persistentVolumeClaim:
             claimName: media-pvc
         - name: static-storage
           persistentVolumeClaim:
-            claimName: static-pvc
+           claimName: static-pvc
 ---
 apiVersion: v1
 kind: Service
