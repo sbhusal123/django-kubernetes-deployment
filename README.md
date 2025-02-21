@@ -73,10 +73,13 @@ Volumes are mounted insde: ``/mnt/`` in the minikube. To view volumes:
 - SSH into minikube: ``minikube ssh``
 - CD into mount path: ``/mnt``
 
-# Reference Follow For Solving Related Errors:
+# References:
 
 - [CreateContainerConfigError](https://stackoverflow.com/questions/63059963/kubernete-createcontainerconfigerror)
 
 - [Kubernetes Resource Creation](https://github.com/sbhusal123/kubernetes-curated/tree/main/Curated%20Reference/Resource%20Creation)
 
 - [Persistent Volume Creation With Minikube](https://github.com/sbhusal123/kubernetes-curated/blob/main/Curated%20Reference/Using%20Volumes%20From%20Host.md)
+
+- [Handy Commands](https://github.com/sbhusal123/kubernetes-curated/blob/main/Curated%20Reference/Handy%20Commands.md#kubernetes-kubectl-commands)
+
