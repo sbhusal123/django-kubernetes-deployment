@@ -66,6 +66,11 @@ http://192.168.39.66:31073
 
 Here, ``django-app`` is the namespace.
 
+Volumes are mounted insde: ``/mnt/`` in the minikube. To view volumes:
+
+- SSH into minikube: ``minikube ssh``
+- CD into mount path: ``/mnt``
+
 # Reference Follow For Solving Related Errors:
 
 - [CreateContainerConfigError](https://stackoverflow.com/questions/63059963/kubernete-createcontainerconfigerror)

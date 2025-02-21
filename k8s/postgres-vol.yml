@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local1
   hostPath:
-    path: "/home/surya/django-app/postgres"
+    path: "/mnt/postgres"
 
 ---
 apiVersion: v1

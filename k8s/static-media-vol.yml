@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local3
   hostPath:
-    path: "/home/surya/django-app/static"
+    path: "mnt/static"
 
 ---
 apiVersion: v1
@@ -40,14 +40,14 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local4
   hostPath:
-    path: "/home/surya/django-app/media"
+    path: "/mnt/media"
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: media-pvc
-  namespace: django-app  
+  namespace: django-app 
 spec:
   accessModes:
     - ReadWriteMany

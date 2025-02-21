@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local2
   hostPath:
-    path: "/home/surya/django-app/redis"
+    path: "/mnt/redis"
 
 ---
 apiVersion: v1

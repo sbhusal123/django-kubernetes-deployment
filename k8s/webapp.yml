@@ -21,6 +21,18 @@ spec:
           envFrom:
             - configMapRef:
                 name: django-conf
+          volumeMounts:
+            - name:  media-storage
+              mountPath:  /app/media/
+            - name:  static-storage
+              mountPath:  /app/static/
+      volumes:
+        - name:  media-storage
+          persistentVolumeClaim: 
+            claimName: media-pvc
+        - name: static-storage
+          persistentVolumeClaim:
+            claimName: static-pvc
 ---
 apiVersion: v1
 kind: Service

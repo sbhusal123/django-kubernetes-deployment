@@ -24,7 +24,8 @@ from .import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('status', views.foo_view)
+    path('status', views.foo_view),
+    path('hostname', views.host_name),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
