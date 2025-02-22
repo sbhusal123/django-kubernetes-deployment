@@ -10,7 +10,7 @@ pipeline {
         
         stage('Push Docker Image To Registry') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', 
                                                   usernameVariable: 'DOCKERHUB_USERNAME', 
                                                   passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     sh 'echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin'
