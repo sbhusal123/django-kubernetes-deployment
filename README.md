@@ -73,6 +73,16 @@ Volumes are mounted insde: ``/mnt/`` in the minikube. To view volumes:
 - SSH into minikube: ``minikube ssh``
 - CD into mount path: ``/mnt``
 
+# Runing CI With Jenkins:
+
+Pipeline Written in [Jenkinsfile](./Jenkinsfile)
+
+Since this requires access to docker and kubernetes. User ``jenkins`` should be added to docker group.
+
+```sh
+sudo usermod -aG docker jenkins
+```
+
 # References:
 
 - [CreateContainerConfigError](https://stackoverflow.com/questions/63059963/kubernete-createcontainerconfigerror)
