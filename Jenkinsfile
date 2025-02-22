@@ -25,7 +25,11 @@ pipeline {
 
         stage('Deploy To Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/'
+                    withCredentials([string(credentialsId: 'kubernetes-secret', variable: 'K8S_TOKEN')]) {
+                        sh """
+                            kubectl --token=$K8S_TOKEN get pods
+                        """
+                    }
             }
         }
 
