@@ -10,11 +10,10 @@ pipeline {
         
         stage('Push Docker Image To Registry') {
             steps {
-                withCredentials([usernamePassword(credentials,
-                    id: 'dockerhub-credentials',
-                    usernameVariable: 'DOCKERHUB_USERNAME',
-                    passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', 
+                                                  usernameVariable: 'DOCKERHUB_USERNAME', 
+                                                  passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    sh 'echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin'
                     sh 'docker push sbhusal123/django-app:latest'
                 }
             }
@@ -26,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Rollout Deployment'){
+        stage('Rollout Deployment') {
             steps {
                 sh 'make rollout_deployment'
             }
