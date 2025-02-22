@@ -10,9 +10,13 @@ pipeline {
         
         stage('Push Docker Image To Registry') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_credentials', 
-                                                  usernameVariable: 'DOCKERHUB_USERNAME', 
-                                                  passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                withCredentials(
+                    [usernamePassword(
+                        credentialsId: 'dockerhub_credentials', 
+                        usernameVariable: 'DOCKERHUB_USERNAME', 
+                        passwordVariable: 'DOCKERHUB_PASSWORD'
+                    )]
+                ) {
                     sh 'echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin'
                     sh 'docker push sbhusal123/django-app:latest'
                 }
@@ -21,13 +25,13 @@ pipeline {
 
         stage('Deploy To Kubernetes') {
             steps {
-                sh 'make run'
+                sh 'kubectl apply -f k8s/'
             }
         }
 
         stage('Rollout Deployment') {
             steps {
-                sh 'make rollout_deployment'
+                sh 'kubectl rollout restart deployment/django -n dj_kubernetes'
             }
         }
     }
