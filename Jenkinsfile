@@ -1,8 +1,10 @@
 pipeline {
-    agent any {
+    agent any
+
+    stages {
         stage('Build Docker Image') {
             steps {
-                sh 'docker built -t sbhusal123/django-app'
+                sh 'docker build -t sbhusal123/django-app .'
             }
         }
     }
