@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local3
   hostPath:
-    path: "/mnt/static"
+    path: "/home/app/static"
 
 ---
 apiVersion: v1
@@ -40,7 +40,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local4
   hostPath:
-    path: "/mnt/media"
+    path: "/home/app/media"
 
 ---
 apiVersion: v1

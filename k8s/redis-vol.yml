@@ -11,7 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local2
   hostPath:
-    path: "/mnt/redis"
+    path: "/home/app/redis"
 
 ---
 apiVersion: v1
