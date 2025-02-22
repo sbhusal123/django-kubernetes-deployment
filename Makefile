@@ -1,5 +1,5 @@
 K8S_DIR = k8s
-NAMESPACE = django-app
+NAMESPACE = dj-kubernetes
 
 run:
 	kubectl apply -f $(K8S_DIR)/namespace.yml

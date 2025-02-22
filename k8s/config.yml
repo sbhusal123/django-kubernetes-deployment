@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: django-conf
-  namespace: django-app
+  namespace: dj-kubernetes
 data:
   DB_NAME: foo
   DB_USER: postgres
