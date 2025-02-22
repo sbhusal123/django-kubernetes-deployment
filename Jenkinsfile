@@ -10,7 +10,7 @@ pipeline {
         
         stage('Push Docker Image To Registry') {
             steps {
-                withCredentials([usernamePassword(credentials
+                withCredentials([usernamePassword(credentials,
                     id: 'dockerhub-credentials',
                     usernameVariable: 'DOCKERHUB_USERNAME',
                     passwordVariable: 'DOCKERHUB_PASSWORD')]) {
