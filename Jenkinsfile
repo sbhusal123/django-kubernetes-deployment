@@ -25,8 +25,6 @@ pipeline {
 
         stage('Rollout Deployment') {
             steps {
-
-            steps {
                 withCredentials([
                     sshUserPrivateKey(
                         credentialsId: 'kube_ssh_key',
@@ -39,6 +37,5 @@ pipeline {
                     """
                 }
             }
-        }
     }
 }
