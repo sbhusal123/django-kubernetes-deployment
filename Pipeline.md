@@ -64,6 +64,8 @@ EOF
 
 ```
 
+![Jenkins Credentials](./Jenkins%20Credentials.png)
+
 In the very first step:
 
 1. Builds a docker image and tags it.
