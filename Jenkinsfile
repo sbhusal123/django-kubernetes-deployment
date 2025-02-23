@@ -10,6 +10,8 @@ pipeline {
         
         stage('Push Docker Image To Registry') {
             steps {
+                // username and password secret to be set
+                // credentialsId: dockerhub_credentials
                 withCredentials(
                     [usernamePassword(
                         credentialsId: 'dockerhub_credentials', 
@@ -25,22 +27,25 @@ pipeline {
 
         stage('Rollout Deployment') {
             steps {
-
+                
+                // secret text credentials to be set
                 withCredentials([
                     string(credentialsId: 'ssh_user', variable: 'SSH_USER'),
                     string(credentialsId: 'ssh_host', variable: 'SSH_HOST'),
                     string(credentialsId: 'git_repo_url', variable: 'REPO_URL')
                 ]) {
+                    // sshagent plugin required
                     sshagent(['kube_ssh_key']) {
+                        // && makes sure that the next command is executed only if the previous command is successful
                         sh """
-                            ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} << 'EOF'
-                                kubectl rollout restart deployment/django -n dj_kubernetes
-                                git clone ${REPO_URL}
-                                cd django-kubernetes-deployment
-                                make run
-                                make rollout_deployment
+                            ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "
+                                kubectl rollout restart deployment/django -n dj_kubernetes && \
+                                git clone ${REPO_URL} && \
+                                cd django-kubernetes-deployment && \
+                                make run && \
+                                make rollout_deployment && \
                                 rm -rf django-kubernetes-deployment
-                            EOF
+                            "
                         """
                     }
                 }
