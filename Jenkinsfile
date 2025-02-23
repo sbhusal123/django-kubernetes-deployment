@@ -25,21 +25,17 @@ pipeline {
 
         stage('Rollout Deployment') {
             steps {
-
                 withCredentials([
-                    string(credentialsId: 'kube_ssh_key', variable: 'SSH_KEY_CONTENT'),
-                    string(credentialsId: 'kube_username', variable: 'SSH_USER')
+                    sshUserPrivateKey(
+                        credentialsId: 'kube_ssh_key',
+                        keyFileVariable: 'SSH_KEY',
+                        usernameVariable: 'SSH_USER'
+                    )
                 ]) {
                     sh """
-                        # Write the SSH key content to a temporary file
-                        echo "$SSH_KEY_CONTENT" > /tmp/jenkins_ssh_key
-
-                        # Execute SSH command
-                        ssh -i /tmp/jenkins_ssh_key -o StrictHostKeyChecking=no ${SSH_USER}@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
-
+                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${SSH_USER}@192.168.1.137 'ls -ltra'
                     """
                 }
-
             }
         }   
     }
