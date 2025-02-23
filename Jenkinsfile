@@ -39,7 +39,7 @@ pipeline {
                         // && makes sure that the next command is executed only if the previous command is successful
                         sh """
                             ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "
-                                kubectl rollout restart deployment/django -n dj_kubernetes && \
+                                kubectl rollout restart deployment/django -n dj-kubernetes && \
                                 git clone ${REPO_URL} && \
                                 cd django-kubernetes-deployment && \
                                 make run && \
