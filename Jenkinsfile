@@ -23,19 +23,19 @@ pipeline {
             }
         }
 
-        stage('Deploy To Kubernetes') {
-            steps {
-                    withCredentials([string(credentialsId: 'kubernetes-secret', variable: 'K8S_TOKEN')]) {
-                        sh """
-                            kubectl --token=$K8S_TOKEN get pods
-                        """
-                    }
-            }
-        }
-
         stage('Rollout Deployment') {
             steps {
-                sh 'kubectl rollout restart deployment/django -n dj_kubernetes'
+
+                withCredentials([
+                        usernamePassword(
+                                credentialsId: 'kube-server-cred', 
+                                usernameVariable: 'USER', 
+                                passwordVariable: 'PASS'
+                )]) {
+                    sh """
+                    sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no $USER@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
+                    """
+                }
             }
         }
     }
