@@ -93,3 +93,6 @@ sudo usermod -aG docker jenkins
 
 - [Handy Commands](https://github.com/sbhusal123/kubernetes-curated/blob/main/Curated%20Reference/Handy%20Commands.md#kubernetes-kubectl-commands)
 
+- [Jenkins Docker Build Permission Issue](./Jenkins%20Permissions.md)
+
+- [Working of Jenkins Pipeline](./Pipeline.md)
