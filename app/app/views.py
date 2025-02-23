@@ -20,5 +20,6 @@ def foo_view(request):
 def host_name(request):
     return JsonResponse({
         "status": "Ok",
+        "description": "This is the hostname of the server",
         "hostname": os.environ.get('HOSTNAME', "unknown")
     })
