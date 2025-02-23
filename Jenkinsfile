@@ -33,7 +33,7 @@ pipeline {
                     )
                 ]) {
                     sh """
-                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${SSH_USER}@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
+                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${SSH_USER}@192.168.1.137 'kubectl rollout restart deployment/django -n dj-kubernetes'
                     """
                 }
             }
