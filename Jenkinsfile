@@ -32,9 +32,7 @@ pipeline {
                                 usernameVariable: 'USER', 
                                 passwordVariable: 'PASS'
                         )]) {
-                    sh """
-                    sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no "$USER"@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
-                    """
+                    sh 'sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no "$USER"@192.168.1.137 "kubectl rollout restart deployment/django -n dj_kubernetes"'
                 }
             }
         }
