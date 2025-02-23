@@ -25,12 +25,23 @@ pipeline {
 
         stage('Rollout Deployment') {
             steps {
-                sshagent(['kube_ssh_key']) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no surya@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
-                    """
+
+                withCredentials([
+                    string(credentialsId: 'ssh_user', variable: 'SSH_USER'),
+                    string(credentialsId: 'ssh_host', variable: 'SSH_HOST'),
+                    string(credentialsId: 'git_repo_url', variable: 'REPO_URL')
+                ]) {
+                    sshagent(['kube_ssh_key']) {
+                        sh """
+                            ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} << 'EOF'
+                             'kubectl rollout restart deployment/django -n dj_kubernetes'
+                             git clone ${REPO_URL}
+                             ls -ltra  
+                            EOF
+                        """
+                    }
                 }
             }
-        }   
+        }
     }
 }
