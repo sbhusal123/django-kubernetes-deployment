@@ -25,15 +25,9 @@ pipeline {
 
         stage('Rollout Deployment') {
             steps {
-                withCredentials([
-                    sshUserPrivateKey(
-                        credentialsId: 'kube_ssh_key',
-                        keyFileVariable: 'SSH_KEY',
-                        usernameVariable: 'SSH_USER'
-                    )
-                ]) {
+                sshagent(['kube_ssh_key']) {
                     sh """
-                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${SSH_USER}@192.168.1.137 'ls -ltra'
+                        ssh -o StrictHostKeyChecking=no surya@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
                     """
                 }
             }
