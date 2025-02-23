@@ -34,9 +34,12 @@ pipeline {
                     sshagent(['kube_ssh_key']) {
                         sh """
                             ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} << 'EOF'
-                             'kubectl rollout restart deployment/django -n dj_kubernetes'
-                             git clone ${REPO_URL}
-                             ls -ltra  
+                                kubectl rollout restart deployment/django -n dj_kubernetes
+                                git clone ${REPO_URL}
+                                cd django-kubernetes-deployment
+                                make run
+                                make rollout_deployment
+                                rm -rf django-kubernetes-deployment
                             EOF
                         """
                     }
