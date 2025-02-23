@@ -17,12 +17,8 @@ pipeline {
                         passwordVariable: 'DOCKERHUB_PASSWORD'
                     )]
                 ) {
-                    sh """
-                        echo $DOCKERHUB_USERNAME | docker login -u $DOCKER_PASSWORD --password-stdin
-                    """
-                    sh """
-                        docker push sbhusal123/django-app:latest
-                    """
+                    sh 'echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin'
+                    sh 'docker push sbhusal123/django-app:latest'
                 }
             }
         }
@@ -35,10 +31,9 @@ pipeline {
                                 credentialsId: 'kube-server-cred', 
                                 usernameVariable: 'USER', 
                                 passwordVariable: 'PASS'
-                )]) {
-                    // prevents secret exposing
+                        )]) {
                     sh """
-                        sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no $USER@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
+                    sshpass -p "$PASS" ssh -o StrictHostKeyChecking=no "$USER"@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
                     """
                 }
             }
