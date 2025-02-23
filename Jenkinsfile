@@ -36,7 +36,7 @@ pipeline {
                 ]) {
                     sshagent(['kube_ssh_key']) {
                         sh """
-                            ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
+                            ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}" bash <<EOF
                                 if [ -d django-kubernetes-deployment ]; then \
                                     cd django-kubernetes-deployment && \
                                     git pull; \
@@ -46,6 +46,7 @@ pipeline {
                                 fi && \
                                 make run && \
                                 make rollout_deployment
+                            EOF
                             "
                         """
                     }
