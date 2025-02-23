@@ -83,6 +83,8 @@ Since this requires access to docker and kubernetes. User ``jenkins`` should be 
 sudo usermod -aG docker jenkins
 ```
 
+Reffer [Working of Jenkins Pipeline](./Pipeline.md) for more detail intro on what needs to be done with jenkins.
+
 # References:
 
 - [CreateContainerConfigError](https://stackoverflow.com/questions/63059963/kubernete-createcontainerconfigerror)
