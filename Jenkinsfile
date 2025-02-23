@@ -17,10 +17,8 @@ pipeline {
                         passwordVariable: 'DOCKERHUB_PASSWORD'
                     )]
                 ) {
-                    def user = "${DOCKERHUB_USERNAME}"
-                    def pass = "${DOCKER_PASSWORD}"
                     sh """
-                        echo ${user} | docker login -u ${pass} --password-stdin
+                        echo ${DOCKERHUB_USERNAME} | docker login -u ${DOCKER_PASSWORD} --password-stdin
                     """
                     sh """
                         docker push sbhusal123/django-app:latest
@@ -38,11 +36,8 @@ pipeline {
                                 usernameVariable: 'USER', 
                                 passwordVariable: 'PASS'
                 )]) {
-                    // prevents secret exposing
-                    def user = "${USER}"
-                    def pass = "${PASS}"
                     sh """
-                        sshpass -p "${user}" ssh -o StrictHostKeyChecking=no ${pass}@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
+                        sshpass -p "${USER}" ssh -o StrictHostKeyChecking=no ${PASS}@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
                     """
                 }
             }
