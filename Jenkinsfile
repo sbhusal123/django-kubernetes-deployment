@@ -34,17 +34,18 @@ pipeline {
                     string(credentialsId: 'ssh_host', variable: 'SSH_HOST'),
                     string(credentialsId: 'git_repo_url', variable: 'REPO_URL')
                 ]) {
-                    // sshagent plugin required
                     sshagent(['kube_ssh_key']) {
-                        // && makes sure that the next command is executed only if the previous command is successful
                         sh """
-                            ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "
-                                kubectl rollout restart deployment/django -n dj-kubernetes && \
-                                git clone ${REPO_URL} && \
-                                cd django-kubernetes-deployment && \
+                            ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST}"
+                                if [ -d django-kubernetes-deployment ]; then \
+                                    cd django-kubernetes-deployment && \
+                                    git pull; \
+                                else \
+                                    git clone ${REPO_URL} django-kubernetes-deployment && \
+                                    cd django-kubernetes-deployment; \
+                                fi && \
                                 make run && \
-                                make rollout_deployment && \
-                                rm -rf django-kubernetes-deployment
+                                make rollout_deployment
                             "
                         """
                     }
