@@ -33,13 +33,10 @@ pipeline {
                     sh """
                         # Write the SSH key content to a temporary file
                         echo "$SSH_KEY_CONTENT" > /tmp/jenkins_ssh_key
-                        chmod 600 /tmp/jenkins_ssh_key  # Secure the key
 
                         # Execute SSH command
                         ssh -i /tmp/jenkins_ssh_key -o StrictHostKeyChecking=no ${SSH_USER}@192.168.1.137 'kubectl rollout restart deployment/django -n dj_kubernetes'
 
-                        # Clean up
-                        rm -f /tmp/jenkins_ssh_key
                     """
                 }
 
