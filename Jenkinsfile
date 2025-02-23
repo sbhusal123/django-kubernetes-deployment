@@ -38,11 +38,11 @@ pipeline {
                     sh """
                         ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "
                         if [ -d django-kubernetes-deployment ]; then
-                            cd django-kubernetes-deployment && git pull
+                            cd django-kubernetes-deployment && git pull &&
                         else
-                            git clone ${REPO_URL} django-kubernetes-deployment && cd django-kubernetes-deployment
+                            git clone ${REPO_URL} django-kubernetes-deployment && cd django-kubernetes-deployment &&
                         fi
-                        make run
+                        make run &&
                         make rollout_deployment
                     """
                 }
